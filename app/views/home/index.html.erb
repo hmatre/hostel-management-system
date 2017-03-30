@@ -1,0 +1,6 @@
+<h1 align="center">Welcome to Hostel Management System</h1>
+<div class="container">
+	<% if user_signed_in? %>
+		<%= link_to 'See Hostels List', user_hostels_path(current_user) %>
+	<%end%>
+</div>

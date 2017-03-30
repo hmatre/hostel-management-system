@@ -1,0 +1,19 @@
+<div class="container">
+	<h1>List of Hostels</h1>
+	<% if current_user.admin? %>
+		<%= link_to 'add new Hostel', new_user_hostel_path(current_user) %>
+	<%end%>
+	<table class="table table-hover">	
+		<tr>
+			<th>Hostel-Name</th>
+			<th colspan="2">Options</th>
+		</tr>
+		<tr>
+			<% @hostels.each_with_index do |f,i| %>
+				<td><%= f.name %></td>
+				<td><%= button_to 'show', user_hostel_path(current_user,f), :method => 'get' %></td>
+		</tr>
+			<%end%>
+	</table>
+  <%= link_to 'back', root_path %>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+	<%= form_for ([current_user, @hostel] )do |f| %>
+		<div class="field">
+		  <%= f.label :name, "Hostel Name" %><br />
+		  <%= f.text_field :name, autofocus: true %>
+		</div>
+
+		<div class="field">
+		  <%= f.label :address %><br />
+		  <%= f.text_field :address, autofocus: true %>
+		</div>
+
+		<div class="field">
+		  <%= f.label :pincode %><br />
+		  <%= f.text_field :pincode, autofocus: true %>
+		</div>
+
+		<div class="field">
+		  <%= f.label :mobile_number %><br />
+		  <%= f.text_field :mobile_number, autofocus: true %>
+		</div>
+
+		<div class="field">
+		  <%= f.label :no_of_rooms %><br />
+		  <%= f.text_field :no_of_rooms, autofocus: true %>
+		</div>
+
+		<div class="field">
+		  <%= f.label :room_rent %><br />
+		  <%= f.text_field :room_rent, autofocus: true %>
+		</div>
+
+		<div class="field"><br />
+		  <%= f.submit "Submit" %>
+		</div>
+	<%end%>
+</div>

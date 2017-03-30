@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HostelManagementSystem</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+  	<nav class="navbar navbar-inverse">
+  	  <div class="container-fluid">
+  	    <div class="navbar-header">
+  	      <p class="navbar-brand" >Hostel Management System </p>
+  	    </div>
+		    <% if current_user.present? %>
+		      <div class="navbar-brand">
+		        <%= link_to 'Home', root_path %>
+		      </div>
+		      <div class="navbar-brand navbar-nav navbar-right">
+		        <span class="glyphicon glyphicon-user"> <%= current_user.email %></span> || <%= link_to "logout", destroy_user_session_path, :method => 'delete' %>
+		      </div>
+		    <% else %>
+		      <div class="navbar-brand nav navbar-nav navbar-right">
+		        <span class="glyphicon glyphicon-log-in"> <%= link_to "Login", new_user_session_path, :method => 'get' %></span> ||
+		        <span class="glyphicon glyphicon-user"> <%= link_to "sign_up", new_user_registration_path %></span>
+		      </div>
+		    <% end %>
+  	  </div>
+  	</nav>
+    <%= flash[:alert] %>
+    <%= yield %> 
+  </body>
+</html>

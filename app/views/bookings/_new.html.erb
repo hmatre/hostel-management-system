@@ -1,0 +1,17 @@
+<div class="container">
+	<%= form_for [@hostel, @booking], remote: true  do |f| %>
+		<div class="field">
+		  <%= f.label :no_of_rooms, "No of Rooms" %><br />
+		  <%= f.text_field :no_of_rooms, autofocus: true, id: 'rooms' %>
+		</div>
+
+		<div class="field">
+		  <%= f.label :months, "No of months for booking" %><br />
+		  <%= f.text_field :months, autofocus: true, id: 'months' %>
+		</div>
+
+		<div class="field"><br />
+		  <%= f.submit "Submit", id: 'btn' %>
+		</div>
+	<%end%>	
+</div>
