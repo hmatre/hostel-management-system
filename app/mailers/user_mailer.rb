@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-	default from: 'hmatre@strivepool.com'
+	default from: 'pulkitrahul5@gmail.com'
   def welcome_booking_email(user)
 		@user = user
 		#@hostel_user = hostel_user

@@ -1,0 +1,4 @@
+<div class="container">
+	<%= Booking.last  %>
+	<%= link_to 'confirm', confirm_booking_booking_path(Booking.last), method: :patch %>
+</div>
