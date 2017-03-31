@@ -15,10 +15,11 @@ ActiveRecord::Schema.define(version: 20170329094907) do
   create_table "bookings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "hostel_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "no_of_rooms"
     t.integer  "months"
+    t.boolean  "confirm",     default: false
   end
 
   create_table "hostels", force: :cascade do |t|

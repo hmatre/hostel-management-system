@@ -33,6 +33,7 @@
 			<td colspan="2">
 				<% if current_user.admin? && current_user.id == @hostel.user_id %>
 					<%= link_to 'Edit Hostel details', edit_user_hostel_path(current_user, @hostel.id) %> ||
+					
 				<%end%>
 				<%= link_to 'back', user_hostels_path(current_user) %>
 			</td>
@@ -45,6 +46,11 @@
 	<%#byebug%>
 	<%#=button_to 'book', hostel_bookings_path(@hostel.id), :method => 'post' %>
 </div> -->
+<div class="container ">
+	<% if current_user.admin? && current_user.id == @hostel.user_id %>
+		
+	<%end%>
+</div>
 <div class="container">
 	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#showbooking">Click Here to Book Room</button>
 </div>
