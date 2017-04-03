@@ -9,9 +9,9 @@
 			<th colspan="2">Options</th>
 		</tr>
 		<tr>
-			<% @hostels.each_with_index do |f,i| %>
+			<% @hostels.each do |f| %>
 				<td><%= f.name %></td>
-				<td><%= button_to 'show', user_hostel_path(current_user,f), :method => 'get' %></td>
+				<td><%= link_to 'show', hostel_path(f) %></td>
 		</tr>
 			<%end%>
 	</table>

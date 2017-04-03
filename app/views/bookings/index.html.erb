@@ -1,0 +1,20 @@
+<div class="container ">
+	<h1>Booking Details</h1>
+	<table class="table table-hover col-md-5">
+		<tr>
+			<th>Hostel Name</th>
+			<th>Rooms Booked</th>
+			<th>Booking for months</th>
+		</tr>
+		<% @booking.each do |f| %>
+		<tr>
+		<%#byebug%>
+			<td><%= Hostel.find(f.hostel_id).name %></td>
+			<td><%= f.no_of_rooms %></td>
+			<td><%= f.months %></td>
+		</tr>
+		<%end%>
+	</table>
+	<%#byebug%>
+	<%= link_to "back", root_path  %>
+</div>

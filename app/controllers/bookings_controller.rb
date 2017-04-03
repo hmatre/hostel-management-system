@@ -1,6 +1,8 @@
 class BookingsController < ApplicationController
 	load_and_authorize_resource
 	def index
+		#@hostel = Hostel.find(params[:hostel_id])
+		@booking = current_user.bookings.order(created_at: :desc)
 	end
 
 	def new
@@ -15,11 +17,14 @@ class BookingsController < ApplicationController
 	end
 
 	def show
+		@hostel = Hostel.find(params[:hostel_id])
 	end
 
 	def confirm_booking
 		@booking = Booking.find(params[:id])
-		@booking.update(confirm: true)
+		if @booking.update(confirm: true)
+			UserMailer.welcome_booking_email(current_user).deliver
+		end
 		redirect_to root_path
 	end
 

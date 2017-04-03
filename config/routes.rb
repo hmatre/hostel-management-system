@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   end
 
   resources :bookings,  :only => [] do
-		patch 'confirm_booking', on: :member
+		get 'confirm_booking', on: :member
 	end
+
+  resources :users, :only => [] do
+    resources :bookings, only: [:index]
+  end
 
 	#patch 'bookings/:id/confirm_booking' , to: "bookings#confirm_booking", as: :update_booking
 

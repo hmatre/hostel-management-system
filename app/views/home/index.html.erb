@@ -1,6 +1,11 @@
 <h1 align="center">Welcome to Hostel Management System</h1>
 <div class="container">
 	<% if user_signed_in? %>
-		<%= link_to 'See Hostels List', user_hostels_path(current_user) %>
+		<ul>
+			<li><%= link_to 'See All Hostels List', hostels_path %></li>
+			<% if current_user.bookings.present? %>
+				<li><%= link_to 'See All Your Booking', user_bookings_path(current_user) %></li>
+			<%end%>
+	</ul>
 	<%end%>
 </div>

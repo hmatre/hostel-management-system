@@ -19,8 +19,8 @@
 		        <%= link_to 'Home', root_path %>
 		      </div>
 		      <div class="navbar-brand navbar-nav navbar-right">
-		        <span class="glyphicon glyphicon-user"> <%= current_user.email %></span> || <%= link_to "logout", destroy_user_session_path, :method => 'delete' %>
-		      </div>
+		        <span class="glyphicon glyphicon-user"> <%= current_user.email %></span> || <%= link_to "edit user",  edit_user_registration_path %> || <%= link_to "logout", destroy_user_session_path, :method => 'delete' %>
+		      </div> 
 		    <% else %>
 		      <div class="navbar-brand nav navbar-nav navbar-right">
 		        <span class="glyphicon glyphicon-log-in"> <%= link_to "Login", new_user_session_path, :method => 'get' %></span> ||
