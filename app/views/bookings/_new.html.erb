@@ -2,7 +2,8 @@
 	<%= form_for [@hostel, @booking], remote: true  do |f| %>
 		<div class="field">
 		  <%= f.label :no_of_rooms, "No of Rooms" %><br />
-		  <%= f.text_field :no_of_rooms, autofocus: true, id: 'rooms' %>
+		  <%= f.text_field :no_of_rooms, autofocus: true, id: 'rooms' %></br>
+		  <span id="show" style="color:red"></span>
 		</div>
 
 		<div class="field">
@@ -15,3 +16,31 @@
 		</div>
 	<%end%>	
 </div>
+
+<script type="text/javascript">
+	$('#rooms').keyup(function(){
+		//debugger
+		$.ajax({
+		  method: "GET",
+		  url: "<%= check_booking_availability_path %>",
+		  data: {
+		  	no_of_rooms: $(this).val(),
+		  	hostel_id: <%= @hostel.id %>
+		  },
+		  success: function(data){
+		  	// debugger
+		  	if (data[0] < data[1]) {
+		  		$('#show').html('only-' + data[0] + '-rooms available');
+		  	}else{
+		  		$('#show').html('');
+		  	}
+		  }
+		});
+
+		$('#showbooking').on('hidden.bs.modal', function () {
+			$('#rooms').val('');
+			$('#months').val('');
+			$('#show').text('');
+		});
+	});
+</script>

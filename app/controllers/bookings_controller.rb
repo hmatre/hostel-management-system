@@ -8,12 +8,19 @@ class BookingsController < ApplicationController
 	def new
 	end
 
-	def create                     
+	def create                 
 		@hostel = Hostel.find(params[:hostel_id])
 		@booking = @hostel.bookings.new(booking_params)
-		@booking.save
-		@booked= Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
-		@hostel.available_rooms=@hostel.no_of_rooms-@booked
+		booking_room = booking_params[:no_of_rooms].to_i
+		booked = Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
+		available_rooms = @hostel.no_of_rooms - booked
+		if available_rooms >= booking_room
+			@booking.save 
+		else
+			redirect_to :back, :alert => '* Number of rooms you want to book are not available'
+		end
+		@booked = Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
+		@hostel.available_rooms = @hostel.no_of_rooms - @booked
 	end
 
 	def show
@@ -28,8 +35,23 @@ class BookingsController < ApplicationController
 		redirect_to root_path
 	end
 
-	 private
-	 def booking_params
-	 	 params.require(:booking).permit(:months, :no_of_rooms).merge({user_id:current_user.id})
-	 end
+	def destroy
+		@booking.destroy
+		redirect_to :back
+	end
+
+	def check_booking_availability
+		#debugger
+		@hostel = Hostel.find(params[:hostel_id])
+		@booked = Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
+		@hostel_available_rooms = @hostel.no_of_rooms - @booked
+		@Booking_room = params[:no_of_rooms]
+		render json: [@hostel_available_rooms,@Booking_room]
+	end
+
+	private
+	
+ 	def booking_params
+ 	 params.require(:booking).permit(:months, :no_of_rooms).merge({user_id:current_user.id})
+ 	end
 end

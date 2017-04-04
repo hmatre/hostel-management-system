@@ -1,5 +1,6 @@
 <div class="container">
 	<%= form_for ([current_user, @hostel] )do |f| %>
+		
 		<div class="field">
 		  <%= f.label :name, "Hostel Name" %><br />
 		  <%= f.text_field :name, autofocus: true %>

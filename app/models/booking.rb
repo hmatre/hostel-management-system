@@ -3,9 +3,7 @@ class Booking < ApplicationRecord
 	belongs_to :user
 	belongs_to :hostel
 
-	# def send_email
- #    UserMailer.welcome_booking_email(user).deliver
- #  end
+	validates :no_of_rooms, :months,numericality: true, presence: true
 
   def send_email_to_admin
  	  @hostel_user = User.find(hostel.user_id)

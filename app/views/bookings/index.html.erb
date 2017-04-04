@@ -5,16 +5,23 @@
 			<th>Hostel Name</th>
 			<th>Rooms Booked</th>
 			<th>Booking for months</th>
+			<th>Confirmation</th>
+			<th>Option</th>
 		</tr>
-		<% @booking.each do |f| %>
-		<tr>
+		<% if current_user.bookings.present? %>
+			<% @booking.each do |f| %>
+				<tr>
 		<%#byebug%>
-			<td><%= Hostel.find(f.hostel_id).name %></td>
-			<td><%= f.no_of_rooms %></td>
-			<td><%= f.months %></td>
-		</tr>
+					<td><%= Hostel.find(f.hostel_id).name %></td>
+					<td><%= f.no_of_rooms %></td>
+					<td><%= f.months %></td>
+					<td><%= f.confirm %></td>
+					<td><%= link_to 'delete', hostel_booking_path(current_user.id, f), method: :delete, data: {confirm: "are u sure?"} %></td>
+				</tr>
+			<%end%>
+		<%else%>
+			<tr><td>Currently you have no bookings</td></tr>
 		<%end%>
 	</table>
-	<%#byebug%>
 	<%= link_to "back", root_path  %>
 </div>

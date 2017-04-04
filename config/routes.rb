@@ -11,12 +11,14 @@ Rails.application.routes.draw do
 
   resources :bookings,  :only => [] do
 		get 'confirm_booking', on: :member
+
 	end
 
   resources :users, :only => [] do
     resources :bookings, only: [:index]
   end
 
+  get 'check_booking_availability', to: "bookings#check_booking_availability", as: :check_booking_availability
 	#patch 'bookings/:id/confirm_booking' , to: "bookings#confirm_booking", as: :update_booking
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
