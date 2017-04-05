@@ -1,0 +1,24 @@
+<div class="container">
+	<h1>Booking Details</h1>
+	<table class="table table-hover col-md-5">
+		<tr>
+			<th>Hostel Name</th>
+			<th>Total Number Rooms</th>
+			<th>Rooms Booked</th>
+			<th>Available Rooms</th>
+		</tr>
+		<tr>
+			<% @hostels.each do |f| %>
+				<td><%= f.name %></td>
+				<td><%= f.no_of_rooms %></td>
+				<td><%= Booking.where(hostel_id: f.id).sum(:no_of_rooms) %></td>
+				<% if f.available_rooms == nil %>
+					<td><%= f.no_of_rooms %></td>
+				<%else%>
+					<td><%= f.available_rooms %></td>
+				<%end%>
+		</tr>
+			<%end%>
+	</table>
+	<%= link_to 'back', root_path %>
+</div>

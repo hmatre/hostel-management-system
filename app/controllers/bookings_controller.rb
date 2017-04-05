@@ -21,6 +21,7 @@ class BookingsController < ApplicationController
 		end
 		@booked = Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
 		@hostel.available_rooms = @hostel.no_of_rooms - @booked
+		@hostel.save
 	end
 
 	def show
@@ -36,17 +37,25 @@ class BookingsController < ApplicationController
 	end
 
 	def destroy
+		hostel= Hostel.find(@booking.hostel_id)
 		@booking.destroy
+		booked = Booking.where(hostel_id: @booking.hostel_id).sum(:no_of_rooms)
+		hostel.available_rooms = hostel.no_of_rooms - booked
+		hostel.save
 		redirect_to :back
 	end
 
 	def check_booking_availability
-		#debugger
 		@hostel = Hostel.find(params[:hostel_id])
 		@booked = Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
 		@hostel_available_rooms = @hostel.no_of_rooms - @booked
 		@Booking_room = params[:no_of_rooms]
 		render json: [@hostel_available_rooms,@Booking_room]
+	end
+
+	def admin_booking_status
+		@hostels = current_user.hostels
+		#@user = Hostel.find(id: @hostel).user_id
 	end
 
 	private

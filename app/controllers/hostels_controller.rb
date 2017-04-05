@@ -23,7 +23,7 @@ class HostelsController < ApplicationController
 	def show
 		#byebug
 		@booked = Booking.where(hostel_id: @hostel).sum(:no_of_rooms)
-		@hostel.available_rooms=@hostel.no_of_rooms-@booked
+		@hostel.available_rooms = @hostel.no_of_rooms - @booked
 		@booking = @hostel.bookings.find_by(user_id: current_user.id)
 	end
 

@@ -16,7 +16,7 @@
 					<td><%= f.no_of_rooms %></td>
 					<td><%= f.months %></td>
 					<td><%= f.confirm %></td>
-					<td><%= link_to 'delete', hostel_booking_path(current_user.id, f), method: :delete, data: {confirm: "are u sure?"} %></td>
+					<td><%= link_to 'delete', hostel_booking_path(current_user.id, f), method: :delete, data: {confirm: "are u sure you want to cancel Booking?"} %></td>
 				</tr>
 			<%end%>
 		<%else%>
