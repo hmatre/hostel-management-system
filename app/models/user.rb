@@ -10,4 +10,5 @@ class User < ApplicationRecord
   enum role_type: [ :admin, :user ]
   has_many :hostels
   has_many :bookings
+  has_many :subscriptions, through: :bookings
 end

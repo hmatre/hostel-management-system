@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406110620) do
+ActiveRecord::Schema.define(version: 20170407120343) do
 
   create_table "bookings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -38,6 +38,25 @@ ActiveRecord::Schema.define(version: 20170406110620) do
     t.text     "description",     limit: 65535
   end
 
+  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.integer  "transaction_id"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.float    "amount",        limit: 24, default: 0.0
+    t.integer  "user_id"
+    t.string   "paypal_email"
+    t.integer  "owner_id"
+    t.string   "paypal_status"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                                default: "", null: false
     t.string   "encrypted_password",                   default: "", null: false
@@ -58,6 +77,7 @@ ActiveRecord::Schema.define(version: 20170406110620) do
     t.integer  "pincode"
     t.integer  "role_type"
     t.string   "avatar"
+    t.string   "paypal_email"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

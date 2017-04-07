@@ -6,7 +6,7 @@
 
       <div class="form-group">
         <%= f.label :role_type %>
-        <%= f.select(:role_type, options_for_select([["Admin", "admin"],["User", "user"]])) %>
+        <%= f.select(:role_type, options_for_select([["User", "user"],["Admin", "admin"]])) %>
       </div>
 
       <div class="form-group">
@@ -20,8 +20,18 @@
       </div>
 
       <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, class: "form-control", autofocus: true %>
+      </div>
+
+      <div class="form-group">
         <%= f.label :age %><br />
         <%= f.text_field :age, class: "form-control", autofocus: true %>
+      </div>
+
+      <div class="form-group" id="pay-email" style="display: none;">
+        <%= f.label :paypal_email %><br />
+        <%= f.text_field :paypal_email, class: "form-control", autofocus: true %>
       </div>
 
       <div class="form-group">
@@ -32,11 +42,6 @@
       <div class="form-group">
         <%= f.label :pincode %><br />
         <%= f.text_field :pincode, class: "form-control", autofocus: true %>
-      </div>
-
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email, class: "form-control", autofocus: true %>
       </div>
 
       <div class="form-group">
@@ -59,3 +64,17 @@
     <%= render "devise/shared/links" %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#user_role_type").change(function(){
+      var val = $('#user_role_type').val();
+      if(val == "user"){
+        $("#pay-email").hide();  
+      }
+      else{
+        $("#pay-email").show();
+      }
+    });
+  });  
+</script>
