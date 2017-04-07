@@ -1,16 +1,38 @@
 <h1 align="center">Welcome to Hostel Management System</h1>
 <div class="container">
-	<% if user_signed_in? %>
-		<ul>
-			<li><%= link_to 'See All Hostels List', hostels_path %></li>
-			
-			<% if current_user.bookings.present? %>
-				<li><%= link_to 'See All Your Booking', user_bookings_path(current_user) %></li>
-			<%end%>
-			
-			<% if current_user.admin? %>
-				<li><%= link_to 'Hostel Bookings status', admin_booking_status_path %></li>
-			<%end%>
-	</ul>
-	<%end%>
+	<div style="margin-bottom: 10px;">
+		<% if user_signed_in? %>
+			<ul class="nav nav-pills">
+				<li><%= link_to 'See All Hostels List', hostels_path, class: 'btn btn-info' %></li>
+				
+				<% if current_user.bookings.present? %>
+					<li><%= link_to 'See All Your Booking', user_bookings_path(current_user), class: 'btn btn-info' %></li>
+				<%end%>
+				
+				<% if current_user.admin? %>
+					<li><%= link_to 'Hostel Bookings status', admin_booking_status_path, class: 'btn btn-info' %></li>
+				<%end%>
+			</ul>
+		<%end%>
+	</div>	
+
+	<div class="row" >
+		<% Hostel.first(3).each do |f| %>
+			<div class="col-md-4">
+				<%= image_tag(f.image_url, class: 'img img-responsive', style: "max-height:240px;" ) %>
+				<strong><p class="text-center text-uppercase"><%= f.name %></p></strong>
+			</div>	
+		<%end%>
+	</div>
+
+	<div style="margin-top: 20px;">
+		<p>
+			Hostel Management System monitors and records a variety of information covering Hostel Attendance, Disciplinary Logs, as well as Room charge Status.
+		
+			Hostel software module includes many features like fee collection, room allotment, room management as categorization of rooms, daily attendance register of hostel and hostel reports.
+		
+			Hostel management system module includes many reports like room allotment register, room left report, charge due reports and receipts, room transfer register and room status report.
+		</p>
+	</div>
+	
 </div>

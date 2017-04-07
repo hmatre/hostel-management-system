@@ -1,9 +1,9 @@
 $('#available-rooms').html('<%= @hostel.available_rooms %>');
 $('#rooms').val("");
-$('#months').val("");
+$('#start-date').val('');
+$('#end-date').val('');
 //$('#showbooking').modal('hide');
 var rooms = <%= @hostel.available_rooms %>
-debugger
 $('#showbooking').modal('hide').on('hidden.bs.modal', function () {
 	//alert("hello");	
 	if (rooms == 0) {

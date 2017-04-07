@@ -1,25 +1,31 @@
-<div class="container">
-	<%= form_for [@hostel, @booking], remote: true  do |f| %>
-		<div class="field">
-		  <%= f.label :no_of_rooms, "No of Rooms" %><br />
-		  <%= f.text_field :no_of_rooms, autofocus: true, id: 'rooms' %></br>
-		  <span id="show" style="color:red"></span>
-		</div>
+<div class="row">
+	<div class="col-sm-6">
+		<%= form_for [@hostel, @booking], remote: true  do |f| %>
+			<div class="form-group">
+			  <%= f.label :no_of_rooms, "No of Rooms" %><br />
+			  <%= f.text_field :no_of_rooms,class: "form-control", autofocus: true, id: 'rooms' %></br>
+			  <span id="show" style="color:red"></span>
+			</div>
 
-		<div class="field">
-		  <%= f.label :months, "No of months for booking" %><br />
-		  <%= f.text_field :months, autofocus: true, id: 'months' %>
-		</div>
+			<div class="form-group">
+			  <%= f.label :start_date, "Select start date for booking" %><br />
+			  <%= f.date_field :start_date, class: "form-control", id: 'start-date' %>
+			</div>
 
-		<div class="field"><br />
-		  <%= f.submit "Submit", id: 'btn' %>
-		</div>
-	<%end%>	
+			<div class="form-group">
+			  <%= f.label :end_date, "Select start date for booking" %><br />
+			  <%= f.date_field :end_date, class: "form-control", id: 'end-date' %>
+			</div>
+
+			<div class="form-group"><br />
+			  <%= f.submit "Submit",class: 'btn btn-primary', id: 'btn' %>
+			</div>
+		<%end%>
+	</div>
 </div>
 
 <script type="text/javascript">
 	$('#rooms').keyup(function(){
-		//debugger
 		$.ajax({
 		  method: "GET",
 		  url: "<%= check_booking_availability_path %>",
@@ -39,7 +45,8 @@
 
 		$('#showbooking').on('hidden.bs.modal', function () {
 			$('#rooms').val('');
-			$('#months').val('');
+			$('#start-date').val('');
+			$('#end-date').val('');
 			$('#show').text('');
 		});
 	});

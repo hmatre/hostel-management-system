@@ -1,45 +1,46 @@
 <div class="container">
-	<h1>Hostel Details</h1>
-	<table class="table table-hover">
-		<tr>
-			<td>Hostel Name:</td>
-			<td><%= @hostel.name %></td>
-		</tr>
-		<tr>
-			<td>Address:</td>
-			<td><%= @hostel.address %></td>
-		</tr>
-		<tr>
-			<td>Pincode:</td>
-			<td><%= @hostel.pincode %></td>
-		</tr>
-		<tr>
-			<td>Mobile No:</td>
-			<td><%= @hostel.mobile_number %></td>
-		</tr>
-		<tr>
-			<td>No of Rooms</td>
-			<td><%= @hostel.no_of_rooms %></td>
-		</tr>
-		<tr>
-			<td>Room Rent</td>
-			<td><%= @hostel.room_rent %></td>
-		</tr>
-		<tr>
-			<td>Available Room</td>
-			<td id="available-rooms"><%= @hostel.available_rooms %></td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<% if current_user.admin? && current_user.id == @hostel.user_id %>
-					<%= link_to 'Edit Hostel details', edit_user_hostel_path(current_user, @hostel.id) %> ||
-					
+	<h2>Hostel Details</h2>
+	<div class="row" style="margin-bottom: 20px;">
+		<div class="col-sm-6">
+			<%= image_tag(@hostel.image_url, class: 'img img-responsive') %>
+		</div>
+		<div class="col-sm-6">
+			<div class="col-sm-12">
+				<% if @hostel.available_rooms>0 %>
+					<button type="button" class="btn btn-info" data-toggle="modal" data-target="#showbooking" id="btn" style="float: right;">Click Here to Book Room</button>
+					<% else %>
+					<button type="button" class="btn btn-info" >Booking full</button>
 				<%end%>
-				<%= link_to 'back', hostels_path %>
-			</td>
-		</tr>
-	</table>
+			</div>
 
+			<h3 class="text-uppercase"><%= @hostel.name %></h3>
+			<ul style="list-style-type: none; padding: 0;">
+				<li>No of Rooms: <%= @hostel.no_of_rooms %></li>			
+				<li>Room Rent: <%= @hostel.room_rent %></li>			
+				<li id="available-rooms">Available Room: <%= @hostel.available_rooms %></li>
+			</ul>
+			<p><strong>Description:</strong></p>
+			<p><%= @hostel.description %></p> 
+		</div>
+		<div class="col-sm-12" style="margin-top: 15px;">
+			<strong>Contact Details:</strong>
+			<ul style="list-style-type: none; padding-left: 10px;">
+				<li><%= @hostel.address %></li>
+				<li><%= @hostel.pincode %></li>
+				<li><%= @hostel.mobile_number %></li>
+			</ul>
+		</div>		
+	</div>
+	
+	<div class="row" style="margin-bottom: 20px;">
+		<div class="col-sm-12">
+			<% if current_user.admin? && current_user.id == @hostel.user_id %>
+				<%= link_to 'Edit Hostel Details', edit_user_hostel_path(current_user, @hostel.id),class: 'btn btn-info' %> ||	
+			<%end%>
+			<%= link_to 'Back', hostels_path,class: 'btn btn-info' %>
+		</div>
+	</div>
+	
 </div>
 <!-- <div class="container" align="center">
 	<h4>Book Room</h4>
@@ -47,13 +48,6 @@
 	<%#=button_to 'book', hostel_bookings_path(@hostel.id), :method => 'post' %>
 </div> -->
 
-<div class="container">
-	<% if @hostel.available_rooms>0 %>
-		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#showbooking" id="btn">Click Here to Book Room</button>
-		<% else %>
-		<button type="button" class="btn btn-info" >Booking full</button>
-	<%end%>
-</div>
 <div id="showbooking" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -62,10 +56,7 @@
         <h4 class="modal-title">Enter Details for Booking Rooms</h4>
       </div>
       <div class="modal-body">
-        <div class="container col-md-12">
-        	<% @booking= Booking.new %>
-        	<%= render 'bookings/new' %>
-        </div><br>
+        <%= render 'bookings/new' %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>

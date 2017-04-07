@@ -30,6 +30,27 @@
   	  </div>
   	</nav>
     <span style="color: red"><%= flash[:alert] %></span>
-    <%= yield %> 
+    <div class="container" style="margin-bottom: 100px;">
+      <%= yield %> 
+    </div>    
+
+    <div class="container-fluid text-center footer_css">
+      <h5 >All Rights Reserved</h5> 
+    </div>
   </body>
+  <style type="text/css">
+    .footer_css{
+      background: #eeeeee;
+      border-top: 1px solid #e4e4e4;
+      line-height: 40px;
+      min-width: 980px;
+      bottom: 0;
+      left: 0;
+      position: fixed;
+      right: 0;
+      padding: 10px;
+    }
+
+  </style>
+
 </html>

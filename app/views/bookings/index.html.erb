@@ -4,24 +4,25 @@
 		<tr>
 			<th>Hostel Name</th>
 			<th>Rooms Booked</th>
-			<th>Booking for months</th>
+			<th>Booking From Date</th>
+			<th>Booking To Date</th>
 			<th>Confirmation</th>
 			<th>Option</th>
 		</tr>
 		<% if current_user.bookings.present? %>
 			<% @booking.each do |f| %>
 				<tr>
-		<%#byebug%>
 					<td><%= Hostel.find(f.hostel_id).name %></td>
 					<td><%= f.no_of_rooms %></td>
-					<td><%= f.months %></td>
+					<td><%= f.start_date %></td>
+					<td><%= f.end_date %></td>
 					<td><%= f.confirm %></td>
-					<td><%= link_to 'delete', hostel_booking_path(current_user.id, f), method: :delete, data: {confirm: "are u sure you want to cancel Booking?"} %></td>
+					<td><%= link_to 'delete', hostel_booking_path(current_user.id, f),class: 'btn btn-info', method: :delete, data: {confirm: "are u sure you want to cancel Booking?"} %></td>
 				</tr>
 			<%end%>
 		<%else%>
 			<tr><td>Currently you have no bookings</td></tr>
 		<%end%>
 	</table>
-	<%= link_to "back", root_path  %>
+	<%= link_to "back", root_path,class: 'btn btn-info'  %>
 </div>
