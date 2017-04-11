@@ -24,6 +24,11 @@
       <%= f.text_field :age, class: "form-control", class: "form-control", autofocus: true %>
     </div>
 
+    <div class="form-group" id="pay-email" style="display: none;">
+        <%= f.label :paypal_email %><br />
+        <%= f.text_field :paypal_email, class: "form-control", autofocus: true %>
+      </div>
+
     <div class="form-group">
       <%= f.label :address %><br />
       <%= f.text_field :address, class: "form-control", class: "form-control", autofocus: true %>
@@ -73,3 +78,18 @@
 
   <%= link_to "Back", :back %>
 </div>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#user_role_type").change(function(){
+      var val = $('#user_role_type').val();
+      if(val == "user"){
+        $("#pay-email").hide();  
+      }
+      else{
+        $("#pay-email").show();
+      }
+    });
+  });  
+</script>

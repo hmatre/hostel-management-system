@@ -10,17 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170407120343) do
+ActiveRecord::Schema.define(version: 20170411093927) do
 
   create_table "bookings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
     t.integer  "hostel_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.integer  "no_of_rooms"
-    t.boolean  "confirm",     default: false
+    t.boolean  "confirm",         default: false
     t.datetime "start_date"
     t.datetime "end_date"
+    t.integer  "subscription_id"
   end
 
   create_table "hostels", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -48,13 +49,15 @@ ActiveRecord::Schema.define(version: 20170407120343) do
   end
 
   create_table "transactions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float    "amount",        limit: 24, default: 0.0
+    t.float    "amount",                limit: 24, default: 0.0
     t.integer  "user_id"
     t.string   "paypal_email"
     t.integer  "owner_id"
     t.string   "paypal_status"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
+    t.string   "paypal_paykey"
+    t.string   "paypal_transaction_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -76,7 +79,6 @@ ActiveRecord::Schema.define(version: 20170407120343) do
     t.text     "address",                limit: 65535
     t.integer  "pincode"
     t.integer  "role_type"
-    t.string   "avatar"
     t.string   "paypal_email"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree

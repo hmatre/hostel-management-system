@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-sm-6">
-		<%= form_for [@hostel, @booking], remote: true  do |f| %>
+		<%= form_for [@hostel, @booking], url: booking_checkout_path, method: 'GET' do |f| %>
 			<div class="form-group">
 			  <%= f.label :no_of_rooms, "No of Rooms" %><br />
 			  <%= f.text_field :no_of_rooms,class: "form-control", autofocus: true, id: 'rooms' %></br>
@@ -18,8 +18,11 @@
 			</div>
 
 			<div class="form-group"><br />
-			  <%= f.submit "Submit",class: 'btn btn-primary', id: 'btn' %>
+				<%= f.hidden_field :hostel_id,:value => @hostel.id %>
+			  <%= f.submit "Book",class: 'btn btn-primary', id: 'btn' %>
 			</div>
+		
+		<%#= link_to 'pay', booking_checkout_path %>
 		<%end%>
 	</div>
 </div>

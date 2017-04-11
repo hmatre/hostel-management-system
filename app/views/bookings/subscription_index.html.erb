@@ -1,0 +1,23 @@
+<h2>Subscriptions Details</h2>
+<div>
+	<table class="table table-hover col-md-5">
+		<tr>
+			<th>Transaction Id</th>
+			<th>Start Date</th>
+			<th>End Date</th>
+		</tr>
+
+		<% if current_user.subscriptions.present? %>
+		<% @subscriptions.each do |f| %>
+			<tr>
+				<td><%= f.transaction_id %></td>
+				<td><%= f.start_date %></td>
+				<td><%= f.end_date %></td>
+		<%end%>
+			</tr>
+		<%else%>
+		<tr><td>Currently you have no Subscriptions</td></tr>
+		<%end%>
+	</table>
+	<%= link_to "back", root_path,class: 'btn btn-info'  %>
+</div>
