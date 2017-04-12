@@ -1,6 +1,11 @@
 <div class="row">
 	<div class="col-md-3">
 		<%= form_for ([current_user, @hostel] )do |f| %>
+			<% if @hostel.errors.any? %>
+			    <% @hostel.errors.full_messages.each do |message| %>
+			      <li><%= message %></li>
+			    <% end %>
+			  <% end %>
 			
 			<div class="form-group">
 			  <%= f.label :name, "Hostel Name" %><br />

@@ -1,7 +1,6 @@
 <div>
 	<div class="row" style="color:green"><h4>Your Booking has been done Successfully.</h4></div>
 	<div>
-		<%byebug%>
 		<strong>Transaction id : </strong><%= @transaction.paypal_transaction_id %></br>
 		<strong>To Pay Email : </strong><%= @transaction.paypal_email %></br>
 		<strong>From Pay Email : </strong><%= @sender_pay_email %></br>

@@ -10,6 +10,7 @@ gem "cancancan"
 gem 'carrierwave'
 gem "mini_magick"
 gem 'paypal-sdk-adaptivepayments'
+gem 'bootstrap-datepicker-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
 gem 'stripe'

@@ -8,16 +8,22 @@ class HostelsController < ApplicationController
 
 	def create
 		@hostel = current_user.hostels.new(hostel_params)
-		@hostel.save
-		redirect_to user_hostels_path(current_user)
+		if @hostel.save
+			redirect_to user_hostels_path(current_user)
+		else
+			render 'new'
+		end
 	end
 
 	def edit
 	end
 
 	def update
-		@hostel.update(hostel_params)
-		redirect_to user_hostels_path(current_user)
+		if @hostel.update(hostel_params)
+			redirect_to user_hostels_path(current_user)
+		else
+			render 'edit'
+		end
 	end
 	
 	def show

@@ -59,7 +59,6 @@ class BookingsController < ApplicationController
 	end
 
 	def booking_checkout
-		debugger
 		hostel = Hostel.find(params[:booking][:hostel_id])
 		session[:hostel_id] = hostel.id
 		paypal_id = User.find(hostel.user_id).paypal_email
@@ -86,7 +85,6 @@ class BookingsController < ApplicationController
 
 		@response = @api.pay(@pay)
 		if @response.success? && @response.payment_exec_status != "ERROR"
-			debugger
 		  @response.payKey
 		  session[:booking_paykey] = @response.payKey
 		  @transaction = Transaction.new
@@ -99,6 +97,15 @@ class BookingsController < ApplicationController
 	end
 
 	def cancel_url
+		byebug
+		@api = PayPal::SDK::AdaptivePayments::API.new
+		# Build request object
+	  @payment_details = @api.build_payment_details({:payKey => session[:booking_paykey] })
+	  # Make API call & get response
+	  payment_details_response = @api.payment_details(@payment_details)
+	  @transaction_amount = payment_details_response.paymentInfoList.paymentInfo.first.receiver.amount
+	  @time = payment_details_response.responseEnvelope.timestamp
+		session[:booking_paykey] = nil
 	end
 
 	def ipn_url
@@ -123,7 +130,7 @@ class BookingsController < ApplicationController
 			redirect_to root_path, :alert => "* Sorry, due to some network issues transaction not completed"
 		end
 
-		create_transaction(amount, receiver_pay_email, owner_id, transaction_status, paykey, transaction_id )
+		create_transaction(amount, receiver_pay_email, @hostel.user_id, transaction_status, paykey, transaction_id )
 		create_subscription(@transaction.id)
 		
 		session[:rooms] = nil
@@ -138,7 +145,6 @@ class BookingsController < ApplicationController
 		@booking.save
 		
 		@hostel = Hostel.find(session[:hostel_id])
-		owner_id = @hostel.user_id
 		@booked = Booking.where(:hostel_id => session[:hostel_id]).sum(:no_of_rooms)
 		@hostel.available_rooms = @hostel.no_of_rooms - @booked
 		@hostel.save
