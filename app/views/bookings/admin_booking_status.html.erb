@@ -12,7 +12,8 @@
 			<% @hostels.each do |f| %>
 				<td><%= f.name %></td>
 				<td><%= f.no_of_rooms %></td>
-				<td><%= Booking.where(hostel_id: f.id).sum(:no_of_rooms) %></td>
+				<%#byebug%>
+				<td><%=  f.bookings.sum(:no_of_rooms) %></td>
 				<% if f.available_rooms == nil %>
 					<td><%= f.no_of_rooms %></td>
 				<%else%>

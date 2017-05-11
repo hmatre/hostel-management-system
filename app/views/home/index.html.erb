@@ -7,9 +7,9 @@
 				
 				<li><%= link_to 'Subscriptions', users_subscriptions_path(current_user.id), class: 'btn btn-info' %></li>
 				
-				<% if current_user.bookings.present? %>
+				<%# if current_user.bookings.present? %>
 					<li><%= link_to 'See All Your Booking', user_bookings_path(current_user), class: 'btn btn-info' %></li>
-				<%end%>
+				<%#end%>
 				
 				<% if current_user.admin? %>
 					<li><%= link_to 'Hostel Bookings status', admin_booking_status_path, class: 'btn btn-info' %></li>

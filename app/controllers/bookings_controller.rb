@@ -97,7 +97,6 @@ class BookingsController < ApplicationController
 	end
 
 	def cancel_url
-		byebug
 		@api = PayPal::SDK::AdaptivePayments::API.new
 		# Build request object
 	  @payment_details = @api.build_payment_details({:payKey => session[:booking_paykey] })

@@ -1,4 +1,5 @@
 class Subscription < ApplicationRecord
-	belongs_to :User
-	has_one :Transaction
+	belongs_to :user
+	# has_one :transaction
+	has_one :booking
 end

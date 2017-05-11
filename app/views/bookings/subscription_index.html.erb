@@ -13,10 +13,11 @@
 		<% @subscriptions.each do |f| %>
 			<tr>
 				<td><%= f.transaction_id %></td>
-				<td><%= Hostel.find(Booking.find_by(subscription_id: f.id).hostel_id).name %></td>
-				<td><%= Booking.find_by(subscription_id: f.id).no_of_rooms %></td>
-				<td><%= f.start_date %></td>
-				<td><%= f.end_date %></td>
+				<%#byebug%>
+				<td><%= f.booking.hostel.name %></td>
+				<td><%= f.booking.no_of_rooms %></td>
+				<td><%= f.start_date.strftime('%F') %></td>
+				<td><%= f.end_date.strftime('%F') %></td>
 		<%end%>
 			</tr>
 		<%else%>

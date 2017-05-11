@@ -6,17 +6,15 @@
 			<th>Rooms Booked</th>
 			<th>Booking From Date</th>
 			<th>Booking To Date</th>
-			<th>Confirmation</th>
 			<th>Option</th>
 		</tr>
 		<% if current_user.bookings.present? %>
 			<% @booking.each do |f| %>
 				<tr>
-					<td><%= Hostel.find(f.hostel_id).name %></td>
+					<td><%= f.hostel.name %></td>
 					<td><%= f.no_of_rooms %></td>
-					<td><%= f.start_date %></td>
-					<td><%= f.end_date %></td>
-					<td><%= f.confirm %></td>
+					<td><%= f.start_date.strftime('%F') %></td>
+					<td><%= f.end_date.strftime('%F') %></td>
 					<td><%= link_to 'delete', hostel_booking_path(current_user.id, f),class: 'btn btn-info', method: :delete, data: {confirm: "are u sure you want to cancel Booking?"} %></td>
 				</tr>
 			<%end%>

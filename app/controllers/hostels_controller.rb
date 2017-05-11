@@ -1,6 +1,14 @@
 class HostelsController < ApplicationController
-	load_and_authorize_resource
+	load_and_authorize_resource except: [:index]
+
 	def index
+		if params[:q].present?
+			@q = Hostel.search(name_cont: params[:q][:name])
+			# @q = Hostel.search(params[:q])
+		else
+			@q = Hostel.search(params[:q])
+		end
+		@hostels = @q.result(distinct: true)
 	end
 
 	def new
@@ -8,6 +16,7 @@ class HostelsController < ApplicationController
 
 	def create
 		@hostel = current_user.hostels.new(hostel_params)
+		debugger
 		if @hostel.save
 			redirect_to user_hostels_path(current_user)
 		else
