@@ -5,10 +5,10 @@
 #   gem 'sqlite3'
 
 default: &default
-  adapter: mysql2
+  adapter: postgresql
   encoding: utf8 
-  username: root
-  password: root
+  username: rails
+  password: rails
   host: localhost
 
 development:
