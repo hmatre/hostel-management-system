@@ -8,7 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'devise'
-gem 'pg'
+gem 'pg', '~> 0.20.0'
 gem "cancancan"
 gem 'carrierwave'
 gem "mini_magick"
