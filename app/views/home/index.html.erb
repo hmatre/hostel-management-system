@@ -19,11 +19,13 @@
 	</div>	
 
 	<div class="row" >
-		<% Hostel.first(3).each do |f| %>
-			<div class="col-md-4">
-				<%= image_tag(f.image_url, class: 'img img-responsive', style: "max-height:240px;" ) %>
-				<strong><p class="text-center text-uppercase"><%= f.name %></p></strong>
-			</div>	
+		<% if Hostel.count > 0%>
+			<% Hostel.first(3).each do |f| %>
+				<div class="col-md-4">
+					<%= image_tag(f.image_url, class: 'img img-responsive', style: "max-height:240px;" ) %>
+					<strong><p class="text-center text-uppercase"><%= f.name %></p></strong>
+				</div>	
+			<%end%>
 		<%end%>
 	</div>
 
