@@ -5,6 +5,6 @@ class Hostel < ApplicationRecord
 	validates :pincode, length:{is: 6}
 	validates :mobile_number, length:{is: 10}
 	
-	belongs_to :User
+	belongs_to :user
 	has_many :bookings
 end
